@@ -7,9 +7,7 @@ module.exports = {
     this._super (...arguments);
 
     const blueprintConfig = config['ember-blueprint-app'] || {};
-    const {
-      enabled = (config.environment === 'production'),
-    } = blueprintConfig;
+    const { enabled = !!process.env.npm_package_name } = blueprintConfig;
 
     if (enabled) {
       if (type === 'head') {
