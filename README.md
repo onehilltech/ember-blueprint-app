@@ -22,7 +22,9 @@ ember install ember-blueprint-app
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+Just install the add-on. It will add inject code into `index.html` so the 
+[@onehilltech/blueprint-ember](https://github.com/onehilltech/blueprint/packages/blueprint-ember)
+can host it.
 
 
 Contributing
@@ -34,4 +36,4 @@ See the [Contributing](CONTRIBUTING.md) guide for details.
 License
 ------------------------------------------------------------------------------
 
-This project is licensed under the [MIT License](LICENSE.md).
+This project is licensed under the [Apache 2.0 License](LICENSE.md).
