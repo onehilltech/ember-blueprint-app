@@ -1,5 +1,7 @@
 import Service, { inject as service } from '@ember/service';
 import { isPresent } from '@ember/utils';
+import { singularize } from 'ember-inflector';
+import { isArray } from '@ember/array';
 
 /**
  * @class PreloadService
@@ -73,9 +75,25 @@ export default class PreloadService extends Service {
         const models = JSON.parse (decoded);
 
         if (isPresent (models)) {
-          this.store.pushPayload (models);
+          this.push (models);
         }
       }
     }
+  }
+
+  push (data) {
+    const keys = Object.keys (data);
+    const appSerializer = this.store.serializerFor ('application');
+
+    keys.forEach (key => {
+      const modelName = appSerializer.modelNameFromPayloadKey (key);
+      const serializer = this.store.serializerFor (modelName);
+      const Model = this.store.modelFor (modelName);
+      const requestType = isArray (data[key]) ? 'findAll' : 'findRecord';
+      const payload = serializer.normalizeResponse (this.store, Model, data, null, requestType);
+
+      // Push the data to the store.
+      this.store.pushPayload (payload);
+    });
   }
 }
