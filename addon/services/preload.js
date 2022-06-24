@@ -90,10 +90,10 @@ export default class PreloadService extends Service {
       const serializer = this.store.serializerFor (modelName);
       const Model = this.store.modelFor (modelName);
       const requestType = isArray (data[key]) ? 'findAll' : 'findRecord';
-      const payload = serializer.normalizeResponse (this.store, Model, data, null, requestType);
+      const normalized = serializer.normalizeResponse (this.store, Model, data, null, requestType);
 
       // Push the data to the store.
-      this.store.pushPayload (payload);
+      this.store.push (normalized);
     });
   }
 }
