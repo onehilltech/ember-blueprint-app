@@ -27,7 +27,7 @@ export default class PreloadService extends Service {
    * @param fallbackToRemote
    * @return {*}
    */
-  findAll (modelName, options, fallbackToRemote = false) {
+  async findAll (modelName, options, fallbackToRemote = false) {
     const models = this.store.peekAll (modelName);
 
     if (isPresent (models) || !fallbackToRemote) {
@@ -46,7 +46,7 @@ export default class PreloadService extends Service {
    * @param fallbackToRemote
    * @return {*}
    */
-  findRecord (modelName, id, options, fallbackToRemote = false) {
+  async findRecord (modelName, id, options, fallbackToRemote = false) {
     const record = this.store.peekRecord (modelName, id);
 
     if (isPresent (record) || !fallbackToRemote) {
